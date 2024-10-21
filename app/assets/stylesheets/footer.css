@@ -1,0 +1,47 @@
+#newsletterHeading {
+	font-family: Karla, sans-serif;
+  font-weight: 800;
+  font-size: 3.6em;
+  line-height: 120%;
+  letter-spacing: 0.04em;
+}
+
+#subscribeBtn {
+  background-color: #F9D545;
+  color: #000;
+  text-transform: uppercase;
+  border-radius: .692308em;
+  padding: 1em 2em;
+  font-size: 1em;
+  font-weight: 700;
+}
+
+#subscribeInput {
+  color: #fff;
+  text-align: center;
+  background-color: rgb(96, 97, 98);
+  border-radius: .45em;
+  margin-bottom: 0;
+  padding: 0 1.312em;
+  font-size: 1em;
+  font-weight: 800;
+  line-height: 100%;
+  width: 60%;
+  max-width: 40em;
+  text-transform: uppercase;
+  border-color: transparent;
+}
+
+.nav .nav-item a {
+  color: #fff;
+}
+
+@media (max-width: 576px) {
+  .footerSocialTxt {
+    font-size: 1rem !important;
+  }
+
+  #newsletterHeading {
+    font-size: 2em;
+  }
+}
