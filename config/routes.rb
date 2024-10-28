@@ -11,4 +11,8 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "pages#home"
+  get '/staking', to: 'pages#staking'
+  get '/privacy_policy', to: 'pages#privacy_policy'
+  get '/terms_of_use', to: 'pages#terms_of_use'
+  get '/exchange', to: 'pages#exchange'
 end

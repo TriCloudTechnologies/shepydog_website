@@ -2,3 +2,7 @@
 //= link_directory ../stylesheets .css
 //= link_tree ../../javascript .js
 //= link_tree ../../../vendor/javascript .js
+//= link_tree ../stylesheets/home .css
+//= link_tree ../stylesheets/staking .css
+//= link_tree ../stylesheets/privacy_policy .css
+//= link_tree ../stylesheets/exchange .css

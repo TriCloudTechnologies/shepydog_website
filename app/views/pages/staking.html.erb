@@ -1,0 +1,13 @@
+<%= stylesheet_link_tag "staking/main", media: "all" %>
+
+<div style="background-color: #f9d549; padding: 0 0 70px 55px;">
+  <%= render partial: "shared/staking/navbar" %>
+  <div class="tab-content" id="tab-content">
+    <div class="tab-pane active" id="main-tabPanel" role="tabpanel" aria-labelledby="main-tab">
+      <%= render partial: "shared/staking/main_tab_content" %>
+    </div>
+    <div class="tab-pane" id="zero-inflation-yield-tabPanel" role="tabpanel" aria-labelledby="zero-inflation-yield-tab">
+      <%= render partial: "shared/staking/zero-inflation_yield" %>
+    </div>
+  </div>
+</div>
