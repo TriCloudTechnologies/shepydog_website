@@ -9,4 +9,6 @@ class PagesController < ApplicationController
   def terms_of_use;end
 
   def exchange;end
+
+  def bridge;end
 end

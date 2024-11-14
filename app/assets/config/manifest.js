@@ -6,3 +6,4 @@
 //= link_tree ../stylesheets/staking .css
 //= link_tree ../stylesheets/privacy_policy .css
 //= link_tree ../stylesheets/exchange .css
+//= link_tree ../stylesheets/bridge .css

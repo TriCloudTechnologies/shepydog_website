@@ -2,8 +2,105 @@
   color: #fff;
   background-color: #1232de;
   border-radius: 1.5em;
-  padding: .75em 2em;
-  font-size: 1.6em;
+  padding: .5em 1em;
+  font-size: 1em;
   font-weight: 500;
   line-height: 100%;
+}
+
+.h1-92 {
+  color: #000;
+  letter-spacing: -.04em;
+  text-transform: uppercase;
+  font-size: 5em;
+  font-weight: 400;
+  line-height: 120%;
+  font-family: Robotomono, sans-serif;
+}
+
+.box-tags {
+  grid-row-gap: 1.1em;
+  flex-direction: column;
+  margin-top: 3.1em;
+  margin-bottom: 2em;
+  display: flex;
+}
+.wrp-tags {
+  grid-column-gap: .4em;
+  display: flex;
+}
+
+.t-12.tags-text {
+  letter-spacing: 0;
+  text-transform: uppercase;
+  border-radius: 5.33333em;
+  padding: .66em 1.32em .56em;
+  font-weight: 500;
+  line-height: 100%;
+  box-shadow: inset 0 0 0 .166em rgba(0, 0, 0, .8);
+}
+
+.t-16 {
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  line-height: 125%;
+}
+
+.button-blue {
+  color: #fff;
+  background-color: #1232de;
+  border-radius: 1.5em;
+  padding: .75rem 2rem;
+  font-weight: 500;
+  line-height: 100%;
+  text-decoration: none;
+}
+
+.h2-80 {
+  letter-spacing: -.04em;
+  font-weight: 400 !important;
+  line-height: 100%;
+  color: #000;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  font-size: 5rem;
+}
+
+.p-24 {
+  z-index: 1;
+  color: #000;
+  text-transform: uppercase;
+  font-size: 1.4em;
+  display: inline;
+  position: relative;
+}
+
+.h3-44 {
+  color: #000;
+  text-transform: uppercase;
+  font-size: 3rem;
+  font-weight: 400;
+  line-height: 100%;
+}
+
+.roboto-mono {
+  font-family: "Roboto Mono", monospace;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.yellow-line-wide {
+  width: 100%;
+  height: 1.7em;
+  max-width: 57em;
+  background-color: #f4d764;
+}
+
+.p-32-24 {
+  color: #000;
+  letter-spacing: -.04em;
+  text-transform: capitalize;
+  font-size: 1.4em;
+  line-height: 130%;
 }

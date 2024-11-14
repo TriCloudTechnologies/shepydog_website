@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   get '/privacy_policy', to: 'pages#privacy_policy'
   get '/terms_of_use', to: 'pages#terms_of_use'
   get '/exchange', to: 'pages#exchange'
+  get '/bridge', to: 'pages#bridge'
 end

@@ -1,6 +1,6 @@
 <%= stylesheet_link_tag "exchange/main", media: "all" %>
 
-<nav class="navbar navbar-expand-lg bg-body-transparent">
+<nav class="navbar navbar-expand-lg bg-body-transparent z-1 position-fixed w-100">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">ShepyDogs</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,7 +10,7 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
       </ul>
       <div>
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-4">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#">MEMORANDOM</a>
           </li>
@@ -20,8 +20,10 @@
           <li class="nav-item">
             <a class="nav-link">LOCKDROP GUIDE</a>
           </li>
+          <li class="nav-item mt-1 ms-5">
+            <a id="launchApp-btn" class="nav-link">LAUNCH APP</a>
+          </li>
         </ul>
-        <div id="launchApp-btn">LAUNCH APP</div>
       </div>
     </div>
   </div>
