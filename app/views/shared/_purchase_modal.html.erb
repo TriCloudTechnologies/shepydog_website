@@ -9,19 +9,19 @@
       </div>
       <div class="modal-body">
         <button class="btn bg-color-gold" onclick="adjustValue(-1)">-</button>
-        <input class="text-end" id="coinCount" type="number" />
+        <input class="text-end" id="purchase_coinCount" type="number" onchange="adjustPurchaseCoinCount()" />
         <button class="btn bg-color-gold" onclick="adjustValue(1)">+</button>
       </div>
 
       <div class="row px-4">
         <div class="col-12">
-          <span class="fs-5 fw-bold">Total Amount</span>
-          <span id="totalCoins">0</span>
-          <span class="me-3">x</span>
-          <span id="ethValue"><%= @token_details[9].to_f/10**18 %></span>
-          <span>ETH</span>
-          <span> = </span>
-          <span id="totalAmount">0</span>
+          <span class="fs-5 fw-bold me-3">Total Amount:</span>
+          <span id="purchase_totalCoins" class="me-2">0</span>
+          <span class="me-2">x</span>
+          <span id="ethValue" class="me-2"><%= @token_details[9].to_f/10**18 %></span>
+          <span class="me-2">ETH</span>
+          <span class="me-2"> = </span>
+          <span id="purchase_totalAmount" class="me-2">0</span>
           <span>ETH</span>
         </div>
       </div>
@@ -34,26 +34,35 @@
 </div>
 
 <script type="text/javascript">
-  function adjustValue(value) {
-    const input = document.getElementById('coinCount');
-    input.value = Number(input.value) + value;
-    document.getElementById('totalCoins').innerHTML = input.value;
+  function adjustPurchaseCoinCount(){
+    const purchase_inputCoinCount = event.target;
+    document.getElementById('totalGiftCoins').innerHTML = purchase_inputCoinCount.value;
 
-    valueElement = document.getElementById('ethValue');
-    const numberString = valueElement.textContent || valueElement.innerText;
-    const numberValue = parseFloat(numberString);
-    document.getElementById('totalAmount').innerHTML = (numberValue * input.value).toFixed(6);
+    let purchase_valueElement = document.getElementById('ethValue');
+    const purchase_numberString = purchase_valueElement.textContent || purchase_valueElement.innerText;
+    const purchase_numberValue = parseFloat(purchase_numberString);
+    document.getElementById('purchase_totalAmount').innerHTML = (purchase_numberValue * purchase_inputCoinCount.value).toFixed(6);
+  }
+
+  function adjustValue(value) {
+    const purchase_input = document.getElementById('purchase_coinCount');
+    purchase_input.value = Number(purchase_input.value) + value;
+    document.getElementById('purchase_totalCoins').innerHTML = purchase_input.value;
+
+    let purchase_valueElement = document.getElementById('ethValue');
+    const purchase_numberString = purchase_valueElement.textContent || purchase_valueElement.innerText;
+    const purchase_numberValue = parseFloat(purchase_numberString);
+    document.getElementById('purchase_totalAmount').innerHTML = (purchase_numberValue * purchase_input.value).toFixed(6);
   }
 
   async function proceedPayment() {
-    const coinsCount = document.getElementById('coinCount').value;
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-    const totalAmount = document.getElementById('totalAmount').innerHTML;
+    const purchase_coinsCount = document.getElementById('purchase_coinCount').value;
+    const purchase_totalAmount = document.getElementById('purchase_totalAmount').innerHTML;
 
-    const contractAddress = '0xADB2288bc444a6E76D723C27Fc8a100b1446b96a';
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner(); 
-    const contractABI = [
+    const purchase_contractAddress = '0xADB2288bc444a6E76D723C27Fc8a100b1446b96a';
+    const purchase_provider = new ethers.providers.Web3Provider(window.ethereum);
+    const purchase_signer = purchase_provider.getSigner(); 
+    const purchase_contractABI = [
       {
         "inputs": [
           {
@@ -69,9 +78,12 @@
       }
     ];
 
-    const contract = new ethers.Contract(contractAddress, contractABI, signer);
-    const walletAddress = document.getElementById('walletAddress').value;
+    const purchase_contract = new ethers.Contract(purchase_contractAddress, purchase_contractABI, purchase_signer);
 
-    await contract.buySaleTokens(parseInt(coinsCount), { value: ethers.utils.parseEther(totalAmount) });
+    purchase_contract.buySaleTokens(parseInt(purchase_coinsCount), { value: ethers.utils.parseEther(purchase_totalAmount) });
+
+    $("#purchaseModal").modal('hide');
+    $(".modal-backdrop").addClass('d-none')
+    alert('Continue on Metamask.');
   }
 </script>

@@ -13,20 +13,20 @@
         <br>
         <div class="d-flex gap-3">
           <button class="btn bg-color-gold" onclick="adjustGiftCountValue(-1)">-</button>
-          <input class="text-end form-control w-75" id="giftCoinCount" type="number" />
+          <input class="text-end form-control w-75" id="giftCoinCount" type="number" onchange="adjustGiftCount()" />
           <button class="btn bg-color-gold" onclick="adjustGiftCountValue(1)">+</button>
         </div>
       </div>
 
       <div class="row px-4">
         <div class="col-12">
-          <span class="fs-5 fw-bold">Total Amount</span>
-          <span id="totalGiftCoins">0</span>
-          <span class="me-3">x</span>
-          <span id="giftEthValue"><%= @token_details[9].to_f/10**18 %></span>
-          <span>ETH</span>
-          <span> = </span>
-          <span id="giftTotalAmount">0</span>
+          <span class="fs-5 fw-bold me-3">Total Amount:</span>
+          <span id="totalGiftCoins" class="me-2">0</span>
+          <span class="me-2">x</span>
+          <span id="giftEthValue" class="me-2"><%= @token_details[9].to_f/10**18 %></span>
+          <span class="me-2">ETH</span>
+          <span class="me-2"> = </span>
+          <span id="giftTotalAmount" class="me-2">0</span>
           <span>ETH</span>
         </div>
       </div>
@@ -39,24 +39,34 @@
 </div>
 
 <script type="text/javascript">
-  function adjustGiftCountValue(value) {
-    const input = document.getElementById('giftCoinCount');
-    input.value = Number(input.value) + value;
-    document.getElementById('totalGiftCoins').innerHTML = input.value;
+  function adjustGiftCount(){
+    const gift_inputCoinCount = event.target;
+    document.getElementById('totalGiftCoins').innerHTML = gift_inputCoinCount.value;
 
-    valueElement = document.getElementById('giftEthValue');
-    const numberString = valueElement.textContent || valueElement.innerText;
-    const numberValue = parseFloat(numberString);
-    document.getElementById('giftTotalAmount').innerHTML = (numberValue * input.value).toFixed(6);
+    let gift_valueElement = document.getElementById('giftEthValue');
+    const gift_numberString = gift_valueElement.textContent || gift_valueElement.innerText;
+    const gift_numberValue = parseFloat(gift_numberString);
+    document.getElementById('giftTotalAmount').innerHTML = (gift_numberValue * gift_inputCoinCount.value).toFixed(6);
+  }
+
+  function adjustGiftCountValue(value) {
+    const gift_inputCoinCount = document.getElementById('giftCoinCount');
+    gift_inputCoinCount.value = Number(gift_inputCoinCount.value) + value;
+    document.getElementById('totalGiftCoins').innerHTML = gift_inputCoinCount.value;
+
+    let gift_valueElement = document.getElementById('giftEthValue');
+    const gift_numberString = gift_valueElement.textContent || gift_valueElement.innerText;
+    const gift_numberValue = parseFloat(gift_numberString);
+    document.getElementById('giftTotalAmount').innerHTML = (gift_numberValue * gift_inputCoinCount.value).toFixed(6);
   }
 
   async function proceedGiftTransaction() {
-    const coinsCount = document.getElementById('giftCoinCount').value;
+    const gift_coinsCount = document.getElementById('giftCoinCount').value;
 
-    const contractAddress = '0xADB2288bc444a6E76D723C27Fc8a100b1446b96a';
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner(); 
-    const contractABI = [
+    const gift_contractAddress = '0xADB2288bc444a6E76D723C27Fc8a100b1446b96a';
+    const gift_provider = new ethers.providers.Web3Provider(window.ethereum);
+    const gift_signer = gift_provider.getSigner(); 
+    const gift_contractABI = [
       {
         "inputs": [
           {
@@ -77,9 +87,13 @@
       }
     ];
 
-    const contract = new ethers.Contract(contractAddress, contractABI, signer);
-    const walletAddress = document.getElementById('walletAddress').value;
+    const gift_contract = new ethers.Contract(gift_contractAddress, gift_contractABI, gift_signer);
+    const gift_walletAddress = document.getElementById('gift_walletAddress').value;
 
-    await contract.giftTokens(parseInt(coinsCount), walletAddress);
+    gift_contract.giftTokens(parseInt(gift_coinsCount), gift_walletAddress);
+
+    $("#giftModal").modal('hide');
+    $(".modal-backdrop").addClass('d-none')
+    alert('Continue on Metamask.');
   }
 </script>
