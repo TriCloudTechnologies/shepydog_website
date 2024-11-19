@@ -1,0 +1,22 @@
+<% flash.each do |name, msg| %>
+  <% if flash[:notice] %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <%= msg %>
+      <button class="btn-close" aria-label="Close" data-bs-dismiss="alert" type="button"></button>
+    </div>
+  <% end %>
+
+  <% if flash[:error] %>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <%= msg %>
+      <button class="btn-close" aria-label="Close" data-bs-dismiss="alert" type="button"></button>
+    </div>
+  <% end %>
+
+  <% if flash[:alert] %>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <%= msg %>
+      <button class="btn-close" aria-label="Close" data-bs-dismiss="alert" type="button"></button>
+    </div>
+  <% end %>
+<% end %>

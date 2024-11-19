@@ -7,3 +7,4 @@
 //= link_tree ../stylesheets/privacy_policy .css
 //= link_tree ../stylesheets/exchange .css
 //= link_tree ../stylesheets/bridge .css
+//= link_tree ../stylesheets/shared .css

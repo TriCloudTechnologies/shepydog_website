@@ -1,0 +1,142 @@
+<div style="background-color: rgb(32, 36, 40);">
+  <%= render partial: "shared/home/navbar" %>
+
+  <%= stylesheet_link_tag "home/heroSection", media: "all" %>
+
+  <div class="container">
+     <div class="row">
+      <div class="col-12 d-flex justify-content-center align-items-center flex-column py-5">
+        <%= image_tag "logo.png", class: "img-fluid hero-img" %>
+        <h1 class="h1-64">Shepydogs</h1>
+        
+      </div>
+      <div class="col-12 d-flex justify-content-center align-items-center flex-column">
+        <table class="table table-dark  table-group-divider">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Total Count</th>
+              <th scope="col">Price</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="color-gold">
+                <%= image_tag "logo.png", class: "img-fluid", width: "40px" %>
+                Remaining Pre Sale Tokens
+              </td>
+              <td id="preSaleTokens"><%= @token_details[0] %></td>
+              <td>
+                <%= @token_details[9].to_f/10**18 %> ETH
+              </td>
+              <td>
+                <button type="button" class="buy-now-btn btn" data-bs-toggle="modal" data-bs-target="#purchaseModal">
+                  <%= image_tag "buy-icon.svg", size: '20' %>
+                  Buy Now
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td class="color-gold">
+                <%= image_tag "logo.png", class: "img-fluid", width: "40px" %>
+                Remaining Game Tokens
+              </td>
+              <td><%= @token_details[4] %></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="color-gold">
+                <%= image_tag "logo.png", class: "img-fluid", width: "40px" %>
+                Remaining Gift Tokens
+              </td>
+              <td><%= @token_details[5] %></td>
+              <td></td>
+              <td>
+                <button type="button" class="buy-now-btn btn" data-bs-toggle="modal" data-bs-target="#giftModal">
+                  <%= image_tag "gift-icon.svg", size: '20' %>
+                  Gift Now
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td class="color-gold">
+                <%= image_tag "logo.png", class: "img-fluid", width: "40px" %>
+                Remaining Advertising Marketing Tokens
+              </td>
+              <td><%= @token_details[6] %></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="color-gold">
+                <%= image_tag "logo.png", class: "img-fluid", width: "40px" %>
+                Total Remaining Tokens
+              </td>
+              <td><%= @token_details[8] %></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="color-gold">
+                <%= image_tag "logo.png", class: "img-fluid", width: "40px" %>
+                Sale Tokens Reserve
+              </td>
+              <td><%= @token_details[1] %></td>
+              <td><%= @token_details[10].to_f/10**18 %> ETH</td>
+              <td>
+                <button class="buy-now-btn btn" onclick="BuySaleToken()">
+                  <%= image_tag "buy-icon.svg", size: '20' %>
+                  Buy Now
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td class="color-gold">
+                <%= image_tag "logo.png", class: "img-fluid", width: "40px" %>
+                Listing Tokens Reserve
+              </td>
+              <td><%= @token_details[3] %></td>
+              <td><%= @token_details[11].to_f/10**18 %> ETH</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-12">
+        <div class="box-download m-5">
+           <div class="fs-5 text-white text-center">DOWNLOAD APP NOW</div>
+           <div class="box-img-store mt-2 text-center">
+              <a href="#" class="d-inline-block me-2 ">
+                <%= image_tag "google-play-store-btn.svg", class: "img-store img-fluid", loading: "lazy" %>
+              </a>
+              <a href="#" class="d-inline-block">
+                <%= image_tag "app-store-btn.svg", class: "img-store img-fluid", loading: "lazy" %>
+              </a>
+           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= render partial: "shared/home/footer" %>
+</div>
+<%= render partial: "shared/purchase_modal" %>
+<%= render partial: "shared/gift_modal" %>
+
+<script>
+  function BuySaleToken() {
+    const preSaleTokens = document.getElementById('preSaleTokens').innerHTML;
+
+    if (parseInt(preSaleTokens) > 0) {
+      const modalElement = document.getElementById('purchaseModal');
+
+      if(modalElement){ 
+        const modal = new bootstrap.Modal(modalElement); modal.show(); 
+      }
+    } else {
+      alert("Sales Token can be bought once Pre Sale Tokens are finished.")
+    }
+  }
+
+</script>

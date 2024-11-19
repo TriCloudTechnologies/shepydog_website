@@ -26,3 +26,16 @@
 .hero-img {
   width: 20em;
 }
+
+.color-gold {
+  color: #F9D545 !important;
+}
+
+.bg-color-gold {
+  background-color: #F9D545 !important;
+}
+
+.buy-now-btn{
+  background-color: #F9D545;
+  margin-left: 15px; 
+}
