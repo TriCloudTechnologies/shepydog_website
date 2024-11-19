@@ -20,14 +20,16 @@ RUN apt-get update -qq && \
 ENV RAILS_ENV="production" \
     BUNDLE_DEPLOYMENT="1" \
     BUNDLE_PATH="/usr/local/bundle" \
-    BUNDLE_WITHOUT="development"
+    BUNDLE_WITHOUT="development" \
+    SECRET_KEY_BASE='e8a14d27c7b6f23d0798502e26cf8160ccba7571d4c2661dfdf0fc3424fa864d25ccd70adcbd2153c307f7dbdd442cbe88fa8eea3c01018d289385a0edcc095a' \
+    DATABASE_URL='postgresql://postgres:jdgufwTseHtyuQBIMHqEgsqUpaLyKtse@autorack.proxy.rlwy.net:52668/railway'
 
 # Throw-away build stage to reduce size of final image
 FROM base AS build
 
 # Install packages needed to build gems
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git libpq-dev pkg-config && \
+    apt-get install --no-install-recommends -y build-essential git libpq-dev pkg-config automake autoconf libtool && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Install application gems
