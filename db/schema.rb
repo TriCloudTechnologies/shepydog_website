@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_18_190822) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_13_094602) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "transactions", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.decimal "coin_count", default: "0.0"
+    t.integer "coin_type"
+    t.integer "state"
+    t.string "transaction_id"
+    t.jsonb "meta", default: {}
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_transactions_on_user_id"
+  end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -36,9 +48,17 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_18_190822) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "wallet_address"
+    t.decimal "presale_tokens", default: "0.0"
+    t.decimal "postsale_tokens", default: "0.0"
+    t.decimal "staking_tokens", default: "0.0"
+    t.decimal "unstaked_tokens", default: "0.0"
+    t.decimal "listing_tokens", default: "0.0"
+    t.decimal "total_tokens", default: "0.0"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
+
+  add_foreign_key "transactions", "users"
 end

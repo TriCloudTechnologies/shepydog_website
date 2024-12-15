@@ -54,7 +54,7 @@ body {
 
 
 
-.home-page__connect-button, .home-page__stake-button {
+.home-page__connect-button, .home-page__stake-button, .home-page__claim_reward-button {
   width: 100%;
   border-radius: 32px;
   background: #000;
@@ -72,7 +72,7 @@ body {
   height: 126px;
 }
 
-.home-page__connect-button:hover, .home-page__stake-button:hover {
+.home-page__connect-button:hover, .home-page__stake-button:hover, .home-page__claim_reward-button:hover {
   opacity: .8;
 }
 
@@ -360,4 +360,78 @@ body {
   font-weight: 700;
   font-size: 16px;
   line-height: 120%;
+}
+
+.home-page__input-container {
+  display: flex;
+}
+
+.stake-input {
+  position: relative;
+  flex: 2 1;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.data-container {
+  background: hsla(0, 0%, 100%, .4);
+  border-radius: 32px;
+  box-sizing: border-box;
+}
+
+.stake-input__info-data, .stake-input__line {
+  display: flex;
+  justify-content: space-between;
+}
+
+.stake-input__input {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 100%;
+  background: transparent;
+  border: none;
+  margin: 14px 0;
+}
+
+.home-page__income {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 100%;
+}
+.stake-input__info-data, .stake-input__line {
+  display: flex;
+  justify-content: space-between;
+}
+.stake-input__info-data__max {
+  cursor: pointer;
+}
+.stake-input__info-data_value {
+  display: flex;
+  flex-direction: row;
+  grid-gap: 10px;
+  gap: 10px;
+}
+
+.home-page__stake-button--disabled {
+  opacity: .7;
+  pointer-events: none;
+}
+.home-page__stake-button, .home-page__claim_reward-button {
+  flex: 1 1;
+  margin-left: 8px;
+}
+.home-page__stake-button, .home-page__claim_reward-button {
+  width: 100%;
+  border-radius: 32px;
+  background: #000;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 120%;
+  color: #f9d549;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 5rem;
 }

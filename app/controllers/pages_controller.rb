@@ -1,4 +1,6 @@
 class PagesController < ApplicationController	
+  before_action :authenticate_user!, only: [:staking]
+
   def home;end
 
   def staking;end

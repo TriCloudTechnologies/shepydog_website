@@ -1,8 +1,176 @@
 <div id="hero">
-  <div class="home-page__title">0 DT #0 (<span class="home-page__title__old">SNAPSHOT #0</span>)</div>
-  <div class="home-page__title-text">
-    <div class="mt-2">+0 PER DAY</div>
-    <div class="mt-2">0 UNTIL SNAPSHOT</div>
+  <div class="home-page__title">YOUR CURRENT REWARDS</div>
+  <div class="home-page__title-text fs-1">
+    <div class="mt-2">ARE: <span id ="user_Rewards">0</span> ShepyDog Tokens</div>
   </div>
-  <div class="home-page__connect-button">Connect wallet</div>
+  <button id="connect-wallet-btn" class="home-page__connect-button">Connect wallet</button>
+  <div id="staking__form" class="home-page__input-container d-none">
+    <div class="data-container stake-input" style="padding: 32px;">
+      <div class="stake-input__line">
+        <div>How much do you want to stake:</div>
+        <div class="stake-input__withdraw-container">
+          <div class="">Withdraw</div>
+          <div>How it works?</div>
+        </div>
+      </div>
+      <input type="number" id="staking__coinCount" min="0" class="stake-input__input" placeholder="0" name="stake_input" value="">
+      <div class="home-page__income d-none">+0.08 DROP TICKETS PER DAY</div>
+      <div class="stake-input__info-data">
+        <div class="stake-input__info-data__max">Max 0 SHEPYDOG</div>
+        <div class="stake-input__info-data_value">
+          <div>Unstaked by You: <%= current_user.unstaked_tokens %> SHEPYDOG</div>
+          <div>Staked by You: <%= current_user.staking_tokens %> SHEPYDOG</div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 d-flex flex-column gap-4">
+        <button id="stakeBtn" class="home-page__stake-button home-page__stake-button--disabled" disabled>Stake</button>
+        <button id="claimRewardsBtn" class="home-page__claim_reward-button" disabled>Claim Rewards</button>
+      </div>
+    </div>
+  </div>
 </div>
+
+<script>
+  $(document).ready(async function() {
+    // This checks if the Ethereum object is present in the window (meaning a wallet is available)
+    staking__showForm();
+
+    if (typeof window.ethereum !== 'undefined') {
+      // The wallet (e.g., MetaMask) is installed and available.
+
+      // Check for the connected accounts
+      ethereum.request({ method: 'eth_accounts' }).then((accounts) => {
+        if (accounts.length > 0) {
+          // Wallet is connected
+          calculateStakingReward(accounts[0]);
+          checkStakingEligibility(accounts[0])
+        } else {
+          // No account is connected
+          console.log('No connected wallet');
+        }
+      }).catch((error) => {
+        console.error('Error checking accounts:', error);
+      });
+
+      // Optional: Listen for account or network changes
+      ethereum.on('accountsChanged', (accounts) => {
+        if (accounts.length > 0) {
+          console.log('Account changed:', accounts[0]);
+        } else {
+          console.log('No connected account');
+        }
+      });
+
+      ethereum.on('chainChanged', (chainId) => {
+        console.log('Network changed to:', chainId);
+      });
+
+    } else {
+      // No Ethereum provider (wallet) is detected
+      console.log('Ethereum wallet not detected');
+    }
+  });
+
+  document.getElementById('connect-wallet-btn').addEventListener('click', async () => {
+    if (typeof window.ethereum !== 'undefined') {
+      try {
+        // Request connection to the user's Metamask account
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
+
+        // Get the user's active wallet address
+        const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+        const walletAddress = accounts[0];
+        console.log("Wallet Address =>", walletAddress);
+        // Send the wallet address to your Rails backend using AJAX or a framework like Rails UJS
+
+        // Get the CSRF token from the meta tag
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+        // Define the endpoint and data (for a POST request)
+        const endpoint = "/add_wallet_address";
+        const data = { walletAddress: walletAddress };
+
+        // Make the request with the CSRF token included in the headers
+        fetch(endpoint, {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+              'X-CSRF-Token': csrfToken // Include the CSRF token here
+          },
+          body: JSON.stringify(data) // Send the data as JSON
+        }).then(response => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json(); // Assuming the response is JSON
+        }).then(data => {
+            console.log("Response data:", data);
+        }).catch(error => {
+            console.error("Request failed:", error);
+        });
+        staking__showForm();
+      } catch (error) {
+        console.error('Error connecting to Metamask:', error);
+      }
+    } else {
+      alert('Please install Metamask to use this feature');
+    }
+  });
+
+  function staking__showForm() {
+    if (typeof window.ethereum !== 'undefined') {
+      // The wallet (e.g., MetaMask) is installed and available.
+
+      // Check for the connected accounts
+      ethereum.request({ method: 'eth_accounts' }).then((accounts) => {
+        if (accounts.length > 0) {
+          // Wallet is connected
+          $("#nav-connect-wallet-btn").addClass("d-none");
+          $("#staking__form").removeClass("d-none");
+          $("#connect-wallet-btn").addClass("d-none");
+          console.log('Connected account:', accounts[0]);
+        } else {
+          // No account is connected
+          console.log('No connected wallet');
+        }
+      }).catch((error) => {
+        console.error('Error checking accounts:', error);
+      });
+
+      // Optional: Listen for account or network changes
+      ethereum.on('accountsChanged', (accounts) => {
+        if (accounts.length > 0) {
+          console.log('Account changed:', accounts[0]);
+        } else {
+          console.log('No connected account');
+        }
+      });
+
+      ethereum.on('chainChanged', (chainId) => {
+        console.log('Network changed to:', chainId);
+      });
+
+    } else {
+      // No Ethereum provider (wallet) is detected
+      console.log('Ethereum wallet not detected');
+    }
+  }
+
+  $("#stakeBtn").click(function(){
+    const stakeCount = $("#staking__coinCount").val();
+    const transactions_path = "<%= transactions_path %>";
+    stakeTokens(parseInt(stakeCount), transactions_path);
+  });
+
+  $("#claimRewardsBtn").click(function(){
+    const transactions_path = "<%= transactions_path %>";
+    claimRewards(transactions_path);
+  });
+</script>
+
+<%= javascript_include_tag "calculate_staking_reward" %>
+<%= javascript_include_tag "check_staking_eligibility" %>
+<%= javascript_include_tag "stake_tokens" %>
+<%= javascript_include_tag "claim_rewards" %>

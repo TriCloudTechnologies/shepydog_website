@@ -1,7 +1,7 @@
+<%= stylesheet_link_tag "home/heroSection", media: "all" %>
+
 <div style="background-color: rgb(32, 36, 40);">
   <%= render partial: "shared/home/navbar" %>
-
-  <%= stylesheet_link_tag "home/heroSection", media: "all" %>
 
   <div class="container">
      <div class="row">
@@ -86,9 +86,9 @@
               <td><%= @token_details[1] %></td>
               <td><%= @token_details[10].to_f/10**18 %> ETH</td>
               <td>
-                <button class="buy-now-btn btn" onclick="BuySaleToken()">
-                  <%= image_tag "buy-icon.svg", size: '20' %>
-                  Buy Now
+                <button type="button" class="buy-now-btn btn" data-bs-toggle="modal" data-bs-target="#buySaleTokenModal">
+                  <%= image_tag "gift-icon.svg", size: '20' %>
+                  Gift Now
                 </button>
               </td>
             </tr>
@@ -99,7 +99,12 @@
               </td>
               <td><%= @token_details[3] %></td>
               <td><%= @token_details[11].to_f/10**18 %> ETH</td>
-              <td></td>
+              <td>
+                <button type="button" class="buy-now-btn btn" data-bs-toggle="modal" data-bs-target="#buyListingTokenModal">
+                  <%= image_tag "gift-icon.svg", size: '20' %>
+                  Gift Now
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -123,17 +128,5 @@
 </div>
 <%= render partial: "shared/purchase_modal" %>
 <%= render partial: "shared/gift_modal" %>
-
-<script>
-  function BuySaleToken() {
-    const preSaleTokens = document.getElementById('preSaleTokens').innerHTML;
-
-    if (parseInt(preSaleTokens) > 0) {
-      alert("Sales Token can be bought once Pre Sale Tokens are finished.")
-    } else {
-      const modalElement = document.getElementById('purchaseModal');
-      const modal = new bootstrap.Modal(modalElement); modal.show(); 
-    }
-  }
-
-</script>
+<%= render partial: "shared/buy_sale_token_modal" %>
+<%= render partial: "shared/buy_listing_token_modal" %>

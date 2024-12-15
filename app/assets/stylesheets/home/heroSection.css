@@ -39,3 +39,8 @@
   background-color: #F9D545;
   margin-left: 15px; 
 }
+
+.buy-now-btn:hover {
+  background-color: #b7b7b7;
+  color: #191919;
+}

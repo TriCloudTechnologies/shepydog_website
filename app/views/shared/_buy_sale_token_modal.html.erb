@@ -1,33 +1,33 @@
-<%= javascript_include_tag "purchase_modal" %>
-<div class="modal fade" id="purchaseModal" tabindex="-1" aria-labelledby="purchaseModalLabel" aria-hidden="true">
+<%= javascript_include_tag "buy_sale_token" %>
+<div class="modal fade" id="buySaleTokenModal" tabindex="-1" aria-labelledby="buySaleTokenModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <%= image_tag "logo.png", class: "img-fluid me-4", width: "40px" %>
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Purchase Shepydogs</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Buy Sale Token Shepydogs</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <button class="btn bg-color-gold" onclick="adjustValue(-1)">-</button>
-        <input class="text-end" id="purchase_coinCount" type="number" onchange="adjustPurchaseCoinCount()" />
-        <button class="btn bg-color-gold" onclick="adjustValue(1)">+</button>
+        <button class="btn bg-color-gold" onclick="adjustSaleTokenValue(-1)">-</button>
+        <input class="text-end" id="buy_sale_token_coinCount" type="number" onchange="adjustSaleTokenCount()" />
+        <button class="btn bg-color-gold" onclick="adjustSaleTokenValue(1)">+</button>
       </div>
 
       <div class="row px-4">
         <div class="col-12">
           <span class="fs-5 fw-bold me-3">Total Amount:</span>
-          <span id="purchase_totalCoins" class="me-2">0</span>
+          <span id="buy_sale_token_totalCoins" class="me-2">0</span>
           <span class="me-2">x</span>
           <span id="ethValue" class="me-2"><%= @token_details[9].to_f/10**18 %></span>
           <span class="me-2">ETH</span>
           <span class="me-2"> = </span>
-          <span id="purchase_totalAmount" class="me-2">0</span>
+          <span id="buy_sale_token_totalAmount" class="me-2">0</span>
           <span>ETH</span>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn bg-color-gold" onclick="proceedPayment('<%= transactions_path %>')">Proceed</button>
+        <button type="button" class="btn bg-color-gold" onclick="buySaleToken('<%= transactions_path %>')">Proceed</button>
       </div>
     </div>
   </div>
