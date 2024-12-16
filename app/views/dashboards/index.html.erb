@@ -86,9 +86,9 @@
               <td><%= @token_details[1] %></td>
               <td><%= @token_details[10].to_f/10**18 %> ETH</td>
               <td>
-                <button type="button" class="buy-now-btn btn" data-bs-toggle="modal" data-bs-target="#buySaleTokenModal">
-                  <%= image_tag "gift-icon.svg", size: '20' %>
-                  Gift Now
+                <button type="button" class="buy-now-btn btn" data-bs-toggle="modal" data-bs-target="#buySaleTokenModal" <%= @contract_phase > 0 ? '' : 'disabled' %>
+                  <%= image_tag "buy-icon.svg", size: '20' %>
+                  Buy Now
                 </button>
               </td>
             </tr>
@@ -101,8 +101,8 @@
               <td><%= @token_details[11].to_f/10**18 %> ETH</td>
               <td>
                 <button type="button" class="buy-now-btn btn" data-bs-toggle="modal" data-bs-target="#buyListingTokenModal">
-                  <%= image_tag "gift-icon.svg", size: '20' %>
-                  Gift Now
+                  <%= image_tag "buy-icon.svg", size: '20' %>
+                  Buy Now
                 </button>
               </td>
             </tr>
@@ -126,6 +126,8 @@
   </div>
   <%= render partial: "shared/home/footer" %>
 </div>
+
+<%= javascript_include_tag "create_db_record" %>
 <%= render partial: "shared/purchase_modal" %>
 <%= render partial: "shared/gift_modal" %>
 <%= render partial: "shared/buy_sale_token_modal" %>

@@ -16,29 +16,8 @@ async function claimRewards(transactions_path) {
 
   try {
     const response = await contract.withdrawStakedTokens()
-    createDbRecord(coinsCount, transactions_path, response.hash, response)
+    createDbRecord(coinsCount, transactions_path, response.hash, response, 3)
   } catch (error) {
     console.error('Error calculating reward:', error);
   }
-}
-
-function createDbRecord(count, path, transaction_id, response) {
-  const data = { count: count, coin_type: 3,
-                 transaction_id: transaction_id,
-                 meta: response
-               }
-
-  fetch(path, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").content,
-      },
-      body: JSON.stringify(data),
-  })
-  .then(response => response.json())
-  .catch((error) => {
-      console.error('Error:', error);
-      alert('There was an error saving db record for staking');
-  });
 }

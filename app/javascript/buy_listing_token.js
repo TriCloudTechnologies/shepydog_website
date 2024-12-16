@@ -49,25 +49,5 @@ async function buyListingToken(transaction_path) {
   $("#buyListingTokenModal").modal('hide');
   $(".modal-backdrop").addClass('d-none')
   alert('Continue on Metamask.');
-  createDbRecord(parseInt(buy_listing_token_coinsCount), transaction_path, response.hash, response)
-}
-
-function createDbRecord(count, path, transaction_id, response) {
-  const data = { coin_count: count, coin_type: 4,
-                 transaction_id: transaction_id,
-                 meta: response
-               }
-
-  fetch(path, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").content,
-      },
-      body: JSON.stringify(data),
-  })
-  .then(response => response.json())
-  .catch((error) => {
-    console.error('Error:', error);
-  });
+  createDbRecord(parseInt(buy_listing_token_coinsCount), transaction_path, response.hash, response, 4)
 }

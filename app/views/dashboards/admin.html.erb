@@ -1,0 +1,62 @@
+<%= stylesheet_link_tag "home/heroSection", media: "all" %>
+
+<div style="background-color: rgb(32, 36, 40);">
+  <%= render partial: "shared/home/navbar" %>
+
+  <div class="container">
+     <div class="row">
+      <div class="col-12 d-flex justify-content-center align-items-center flex-column py-5">
+        <%= image_tag "logo.png", class: "img-fluid hero-img" %>
+        <h1 class="h1-64">Shepydogs</h1>
+        <h4 class="text-white mt-4">Current Contract Phase is <span class="color-gold"><%= ContractStatus::PHASES.key(@contract_phase).to_s.humanize %></span></h4>
+      </div>
+      <div class="col-lg-12 d-flex justify-content-between align-items-center flex-column">
+        <div class="row w-100">
+          <div class="col-lg-6">
+            <h2 class="text-white mb-5">Activate Contract</h2>
+            <div class="row">
+              <div class="col-lg-6">
+                <label class="form-label text-white">Start date</label>
+                <input type="date" id="contractStartDate" class="form-control"/>
+              </div>
+              <div class="col-lg-6">
+                <label class="form-label text-white mx-auto">End date</label>
+                <input type="date" id="contractEndDate" class="form-control"/>
+              </div>
+            </div>
+            <button id="activateContract" class="btn getAppBtn mt-4 mx-auto" onclick="activateContract()">Activate Contract</button>
+          </div>
+
+          <div class="col-lg-6">
+            <h2 class="text-white mb-5">Change Contract Phase</h2>
+            <div class="row w-100">
+              <div class="col-lg-6">
+                <%= select_tag :phase, options_for_select(ContractStatus::PHASES.map { |key, value| [key.to_s.humanize, value] }, @contract_phase),{ class: "form-select form-select-lg mb-3", id: "contractStatus" } %>
+              </div>
+              <div class="col-lg-6">
+                <button id="changeContractPhase" class="btn getAppBtn" onclick="changeContractPhase('<%= contract_statuses_path %>')">Change Contract Phase</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="box-download m-5">
+           <div class="fs-5 text-white text-center">DOWNLOAD APP NOW</div>
+           <div class="box-img-store mt-2 text-center">
+              <a href="#" class="d-inline-block me-2 ">
+                <%= image_tag "google-play-store-btn.svg", class: "img-store img-fluid", loading: "lazy" %>
+              </a>
+              <a href="#" class="d-inline-block">
+                <%= image_tag "app-store-btn.svg", class: "img-store img-fluid", loading: "lazy" %>
+              </a>
+           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= render partial: "shared/home/footer" %>
+</div>
+<%= javascript_include_tag "activate_contract" %>
+<%= javascript_include_tag "change_contract_phase" %>

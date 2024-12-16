@@ -20,6 +20,11 @@ Rails.application.routes.draw do
 
   post '/add_wallet_address', to: 'connect_wallet#add_wallet_address'
 
-  resources :dashboards, only: :index
+  resources :dashboards, only: :index do
+    collection do
+      get :admin
+    end
+  end
   resources :transactions, only: :create
+  resources :contract_statuses, only: :create
 end

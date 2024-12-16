@@ -29,10 +29,9 @@ async function checkStakingEligibility(walletAddress) {
   const contract = new ethers.Contract(contractAddress, contractABI, signer);
   try {
     const balance = await contract.balanceOf(walletAddress)
-
     if (Number(balance._hex) > 1){
-      $(".home-page__stake-button").removeClass("home-page__stake-button--disabled");
-      $(".home-page__stake-button").removeAttr("disabled");
+      $("#stakeBtn").removeClass("home-page__stake-button--disabled");
+      $("#stakeBtn").removeAttr("disabled");
     }
   } catch (error) {
     console.error('Error calculating balance:', error);
