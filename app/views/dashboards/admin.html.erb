@@ -11,33 +11,31 @@
         <h4 class="text-white mt-4">Current Contract Phase is <span class="color-gold"><%= ContractStatus::PHASES.key(@contract_phase).to_s.humanize %></span></h4>
       </div>
       <div class="col-lg-12 d-flex justify-content-between align-items-center flex-column">
-        <div class="row w-100">
+        <h2 class="text-white mb-5">Activate Contract</h2>
+        <div class="row">
           <div class="col-lg-6">
-            <h2 class="text-white mb-5">Activate Contract</h2>
-            <div class="row">
-              <div class="col-lg-6">
-                <label class="form-label text-white">Start date</label>
-                <input type="date" id="contractStartDate" class="form-control"/>
-              </div>
-              <div class="col-lg-6">
-                <label class="form-label text-white mx-auto">End date</label>
-                <input type="date" id="contractEndDate" class="form-control"/>
-              </div>
-            </div>
-            <button id="activateContract" class="btn getAppBtn mt-4 mx-auto" onclick="activateContract()">Activate Contract</button>
+            <label class="form-label text-white">Start date</label>
+            <input type="datetime-local" id="contractStartDate" class="form-control rounded-pill"/>
           </div>
-
           <div class="col-lg-6">
-            <h2 class="text-white mb-5">Change Contract Phase</h2>
-            <div class="row w-100">
-              <div class="col-lg-6">
-                <%= select_tag :phase, options_for_select(ContractStatus::PHASES.map { |key, value| [key.to_s.humanize, value] }, @contract_phase),{ class: "form-select form-select-lg mb-3", id: "contractStatus" } %>
-              </div>
-              <div class="col-lg-6">
-                <button id="changeContractPhase" class="btn getAppBtn" onclick="changeContractPhase('<%= contract_statuses_path %>')">Change Contract Phase</button>
-              </div>
-            </div>
+            <label class="form-label text-white mx-auto">End date</label>
+            <input type="datetime-local" id="contractEndDate" class="form-control rounded-pill"/>
           </div>
+        </div>
+        <button id="activateContract" class="btn admin-dashboard-btn mt-4 mx-auto" onclick="activateContract('<%= contract_statuses_path %>')">Activate Contract</button>
+      </div>
+      <div class="col-lg-12 d-flex justify-content-between align-items-center flex-column mt-5 pt-5">
+        <h2 class="text-white mb-5">Change Contract Phase</h2>
+        <% unless @contract_activated %>
+          <div class="text-white fw-medium mb-5" style="font-size: 8pt;">Contract is not activated yet.</div>
+        <% end %>
+        <div class="d-flex w-75 justify-content-center align-items-center gap-4">
+          <%= select_tag :phase, options_for_select(ContractStatus::PHASES.map { |key, value| [key.to_s.humanize, value] }, @contract_phase), 
+            { class: "form-select form-select-lg my-auto rounded-pill", 
+              id: "contractStatus", 
+              style: "width: 20rem;", 
+              disabled: !@contract_activated } %>
+          <button id="changeContractPhase" class="btn admin-dashboard-btn my-auto" onclick="changeContractPhase('<%= contract_statuses_path %>')" <%= @contract_activated ? '' : 'disabled' %> >Change Contract Phase</button>
         </div>
       </div>
 
@@ -59,4 +57,5 @@
   <%= render partial: "shared/home/footer" %>
 </div>
 <%= javascript_include_tag "activate_contract" %>
+<%= javascript_include_tag "create_contract_status_record" %>
 <%= javascript_include_tag "change_contract_phase" %>

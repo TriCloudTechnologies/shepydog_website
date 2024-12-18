@@ -5,11 +5,9 @@ class DashboardsController < ApplicationController
   before_action :set_contract_meta
   before_action :redirect_admin
 
-  def index
-  end
+  def index;end
 
-  def admin
-  end
+  def admin;end
 
   private
 
@@ -27,10 +25,21 @@ class DashboardsController < ApplicationController
   def set_contract_meta
     @token_details = @client.call(@contract, "getTokenDetails")
     @contract_phase = @client.call(@contract, "currentPhase")
+    @contract_activated = check_contract_activated
   end
 
   def redirect_admin
     redirect_to admin_dashboard_path if current_user.is_a?(Admin)
+  end
+
+  def check_contract_activated
+    start_time = @client.call(@contract, "contractStartTime")
+    end_time = @client.call(@contract, "contractEndTime")
+    
+    start_time = Time.at(start_time)
+    end_time = Time.at(end_time)
+
+    Time.now >= start_time && Time.now <= end_time
   end
 end
 

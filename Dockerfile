@@ -24,7 +24,7 @@ ENV RAILS_ENV="production" \
     SECRET_KEY_BASE='e8a14d27c7b6f23d0798502e26cf8160ccba7571d4c2661dfdf0fc3424fa864d25ccd70adcbd2153c307f7dbdd442cbe88fa8eea3c01018d289385a0edcc095a' \
     DATABASE_URL='postgresql://postgres:jdgufwTseHtyuQBIMHqEgsqUpaLyKtse@autorack.proxy.rlwy.net:52668/railway' \
     ETHEREUM_PROVIDER=https://sepolia.infura.io/v3/40aa39b0aea8495c8fe7fb2e394415c9 \
-    CONTRACT_ADDRESS=0xF4321A1211Ba512A1C41810E7d76be42Dd394797
+    CONTRACT_ADDRESS=0xc7218797355CC44588C44D5Acfe2FAe39AeA6aB2
 
 # Throw-away build stage to reduce size of final image
 FROM base AS build

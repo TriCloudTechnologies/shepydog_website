@@ -23,7 +23,7 @@ async function proceedPayment(transaction_path) {
   const purchase_coinsCount = document.getElementById('purchase_coinCount').value;
   const purchase_totalAmount = document.getElementById('purchase_totalAmount').innerHTML;
 
-  const purchase_contractAddress = '0xF4321A1211Ba512A1C41810E7d76be42Dd394797';
+  const purchase_contractAddress = '0xc7218797355CC44588C44D5Acfe2FAe39AeA6aB2';
   const purchase_provider = new ethers.providers.Web3Provider(window.ethereum);
   const purchase_signer = purchase_provider.getSigner(); 
   const purchase_contractABI = [

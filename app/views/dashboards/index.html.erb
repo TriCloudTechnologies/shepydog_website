@@ -31,10 +31,13 @@
                 <%= @token_details[9].to_f/10**18 %> ETH
               </td>
               <td>
-                <button type="button" class="buy-now-btn btn" data-bs-toggle="modal" data-bs-target="#purchaseModal">
+                <button type="button" class="buy-now-btn btn" data-bs-toggle="modal" data-bs-target="#purchaseModal" <%= (@contract_phase == 0 && @contract_activated) ? '' : 'disabled' %> >
                   <%= image_tag "buy-icon.svg", size: '20' %>
                   Buy Now
                 </button>
+                <% unless (@contract_phase == 0 && @contract_activated) %>
+                  <div class="text-white fw-medium" style="font-size: 8pt;">Not available in current phase</div>
+                <% end %>
               </td>
             </tr>
             <tr>
@@ -54,10 +57,13 @@
               <td><%= @token_details[5] %></td>
               <td></td>
               <td>
-                <button type="button" class="buy-now-btn btn" data-bs-toggle="modal" data-bs-target="#giftModal">
+                <button type="button" class="buy-now-btn btn" data-bs-toggle="modal" data-bs-target="#giftModal" <%= @contract_activated ? '' : 'disabled' %>>
                   <%= image_tag "gift-icon.svg", size: '20' %>
                   Gift Now
                 </button>
+                <% unless @contract_activated %>
+                  <div class="text-white fw-medium" style="font-size: 8pt;">Not available in current phase</div>
+                <% end %>
               </td>
             </tr>
             <tr>
@@ -86,10 +92,13 @@
               <td><%= @token_details[1] %></td>
               <td><%= @token_details[10].to_f/10**18 %> ETH</td>
               <td>
-                <button type="button" class="buy-now-btn btn" data-bs-toggle="modal" data-bs-target="#buySaleTokenModal" <%= @contract_phase > 0 ? '' : 'disabled' %>
+                <button type="button" class="buy-now-btn btn" data-bs-toggle="modal" data-bs-target="#buySaleTokenModal" <%= (@contract_phase == 1 && @contract_activated) ? '' : 'disabled' %> >
                   <%= image_tag "buy-icon.svg", size: '20' %>
                   Buy Now
                 </button>
+                <% unless (@contract_phase == 1 && @contract_activated) %>
+                  <div class="text-white fw-medium" style="font-size: 8pt;">Not available in current phase</div>
+                <% end %>
               </td>
             </tr>
             <tr>
@@ -100,10 +109,13 @@
               <td><%= @token_details[3] %></td>
               <td><%= @token_details[11].to_f/10**18 %> ETH</td>
               <td>
-                <button type="button" class="buy-now-btn btn" data-bs-toggle="modal" data-bs-target="#buyListingTokenModal">
+                <button type="button" class="buy-now-btn btn" data-bs-toggle="modal" data-bs-target="#buyListingTokenModal" <%= (@contract_phase == 2 && @contract_activated) ? '' : 'disabled' %> >
                   <%= image_tag "buy-icon.svg", size: '20' %>
                   Buy Now
                 </button>
+                <% unless (@contract_phase == 2 && @contract_activated) %>
+                  <div class="text-white fw-medium" style="font-size: 8pt;">Not available in current phase</div>
+                <% end %>
               </td>
             </tr>
           </tbody>

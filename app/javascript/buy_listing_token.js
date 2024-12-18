@@ -2,7 +2,7 @@ function adjustListingCoinCount(){
   const buy_listing_token_inputCoinCount = event.target;
   document.getElementById('totalGiftCoins').innerHTML = buy_listing_token_inputCoinCount.value;
 
-  let buy_listing_token_valueElement = document.getElementById('ethValue');
+  let buy_listing_token_valueElement = document.getElementById('listingEthValue');
   const buy_listing_token_numberString = buy_listing_token_valueElement.textContent || buy_listing_token_valueElement.innerText;
   const buy_listing_token_numberValue = parseFloat(purchase_numberString);
   document.getElementById('buy_listing_token_totalAmount').innerHTML = (buy_listing_token_numberValue * buy_listing_token_inputCoinCount.value).toFixed(6);
@@ -13,7 +13,7 @@ function adjustListingTokenValue(value) {
   buy_listing_token_input.value = Number(buy_listing_token_input.value) + value;
   document.getElementById('buy_listing_token_totalCoins').innerHTML = buy_listing_token_input.value;
 
-  let buy_listing_token_valueElement = document.getElementById('ethValue');
+  let buy_listing_token_valueElement = document.getElementById('listingEthValue');
   const buy_listing_token_numberString = buy_listing_token_valueElement.textContent || buy_listing_token_valueElement.innerText;
   const buy_listing_token_numberValue = parseFloat(buy_listing_token_numberString);
   document.getElementById('buy_listing_token_totalAmount').innerHTML = (buy_listing_token_numberValue * buy_listing_token_input.value).toFixed(6);
@@ -23,7 +23,7 @@ async function buyListingToken(transaction_path) {
   const buy_listing_token_coinsCount = document.getElementById('buy_listing_token_coinCount').value;
   const buy_listing_token_totalAmount = document.getElementById('buy_listing_token_totalAmount').innerHTML;
 
-  const buy_listing_token_contractAddress = '0xF4321A1211Ba512A1C41810E7d76be42Dd394797';
+  const buy_listing_token_contractAddress = '0xc7218797355CC44588C44D5Acfe2FAe39AeA6aB2';
   const buy_listing_token_provider = new ethers.providers.Web3Provider(window.ethereum);
   const buy_listing_token_signer = buy_listing_token_provider.getSigner(); 
   const buy_listing_token_contractABI = [

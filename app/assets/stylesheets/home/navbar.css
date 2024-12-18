@@ -66,6 +66,29 @@
   }
 }
 
+.admin-dashboard-btn {
+  background-color: #F9D545;
+  color: #141113;
+  text-align: center;
+  border-radius: 2.66em;
+  justify-content: center;
+  padding: 0.7em 1em;
+  font-family: Karla, sans-serif;
+  font-size: 1em;
+  font-weight: 800;
+  display: flex;
+}
+
+.admin-dashboard-btn:hover {
+  background-color: #F9D545;
+  opacity: 0.8;
+}
+
+.admin-dashboard-btn:disabled {
+  background: #e7e7e7;
+  color: #191919;
+}
+
 .navIcons {
   flex-direction: column;
   justify-content: center;

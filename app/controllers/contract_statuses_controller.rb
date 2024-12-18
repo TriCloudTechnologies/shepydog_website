@@ -2,11 +2,17 @@ class ContractStatusesController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    contract_status = ContractStatus.new(contract_status_params)
-    contract_status.save
+    if current_user.admin?
+      contract_status = ContractStatus.new(contract_status_params)
+      contract_status.save
 
-    respond_to do |format|
-      format.json  { render json: { status: :ok } }
+      respond_to do |format|
+        format.json  { render json: { status: :ok } }
+      end
+    else
+      respond_to do |format|
+        format.json { render json: { status: :forbidden, message: 'You do not have permission to create this record.' } }
+      end
     end
   end
 

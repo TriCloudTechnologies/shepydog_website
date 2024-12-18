@@ -2,7 +2,7 @@ function adjustSaleTokenCount(){
   const buy_sale_token_inputCoinCount = event.target;
   document.getElementById('totalGiftCoins').innerHTML = buy_sale_token_inputCoinCount.value;
 
-  let buy_sale_token_valueElement = document.getElementById('ethValue');
+  let buy_sale_token_valueElement = document.getElementById('SaleEthValue');
   const buy_sale_token_numberString = buy_sale_token_valueElement.textContent || buy_sale_token_valueElement.innerText;
   const buy_sale_token_numberValue = parseFloat(purchase_numberString);
   document.getElementById('buy_sale_token_totalAmount').innerHTML = (buy_sale_token_numberValue * buy_sale_token_inputCoinCount.value).toFixed(6);
@@ -13,7 +13,7 @@ function adjustSaleTokenValue(value) {
   buy_sale_token_input.value = Number(buy_sale_token_input.value) + value;
   document.getElementById('buy_sale_token_totalCoins').innerHTML = buy_sale_token_input.value;
 
-  let buy_sale_token_valueElement = document.getElementById('ethValue');
+  let buy_sale_token_valueElement = document.getElementById('SaleEthValue');
   const buy_sale_token_numberString = buy_sale_token_valueElement.textContent || buy_sale_token_valueElement.innerText;
   const buy_sale_token_numberValue = parseFloat(buy_sale_token_numberString);
   document.getElementById('buy_sale_token_totalAmount').innerHTML = (buy_sale_token_numberValue * buy_sale_token_input.value).toFixed(6);
@@ -23,7 +23,7 @@ async function buySaleToken(transaction_path) {
   const buy_sale_token_coinsCount = document.getElementById('buy_sale_token_coinCount').value;
   const buy_sale_token_totalAmount = document.getElementById('buy_sale_token_totalAmount').innerHTML;
 
-  const buy_sale_token_contractAddress = '0xF4321A1211Ba512A1C41810E7d76be42Dd394797';
+  const buy_sale_token_contractAddress = '0xc7218797355CC44588C44D5Acfe2FAe39AeA6aB2';
   const buy_sale_token_provider = new ethers.providers.Web3Provider(window.ethereum);
   const buy_sale_token_signer = buy_sale_token_provider.getSigner(); 
   const buy_sale_token_contractABI = [

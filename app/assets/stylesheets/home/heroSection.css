@@ -44,3 +44,8 @@
   background-color: #b7b7b7;
   color: #191919;
 }
+
+.buy-now-btn:disabled {
+  background: #e7e7e7;
+  color: #191919;
+}
